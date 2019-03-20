@@ -12,9 +12,10 @@ func GetNext(str string) []int {
 			j++
 			res[i] = j
 		} else {
-			j = res[j]
 			if j == 0 {
 				i++
+			} else {
+				j = res[j]
 			}
 		}
 	}
@@ -34,16 +35,16 @@ func Search(str, sub string) []int {
 		if str[i] == sub[j] {
 			i++
 			j++
+			if j == subLen {
+				result = append(result, i-j)
+				j = 0
+			}
 		} else {
-			if next[j] == 0 && j == 0 {
+			if j == 0 {
 				i++
 			} else {
 				j = next[j]
 			}
-		}
-		if j == subLen {
-			result = append(result, i-j)
-			j = 0
 		}
 	}
 	return result
